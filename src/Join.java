@@ -112,7 +112,7 @@ public class Join {
 					log.info("dir=>"+inode);
 				}
 			}catch (Exception e){
-				log.error(e.getMessage());
+				log.info(e.getMessage());
 			}
 
 			Path hdfs = new Path("hdfs://master-hadoop:9000/tmp/output/");
