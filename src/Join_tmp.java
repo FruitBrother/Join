@@ -10,7 +10,6 @@ public class Join_tmp {
 	public static File f = null;
 	private static void initFile(){
 		f = new File("libjnidll.so");	
-
 	}
 
 	public static String[] trans_data(ArrayList<String> o_data,ArrayList<String> u_data,int o_size,int u_size)
