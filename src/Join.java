@@ -225,7 +225,7 @@ public class Join {
 			//System.out.println(new SimpleDateFormat("yyyyMMddHHmmssSSS") .format(new Date() ));
 			JobConf conf = new JobConf();
 
-			Job job2 = Job.getInstance(conf,"job2222");
+			Job job2 = Job.getInstance(conf);
 
 			DistributedCache.addCacheFile(new URI("/library/libjnidll.so#libjnidll.so"), conf);
 			DistributedCache.addCacheFile(new URI("/library/libmyshare.so#libmyshare.so"), conf);
