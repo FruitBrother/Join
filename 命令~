@@ -1,4 +1,4 @@
-javac -classpath /usr/local/hadoop-2.7.2/share/hadoop/common/hadoop-common-2.7.2.jar:/usr/local/hadoop-2.7.2/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.2.jar:/usr/local/hadoop-2.7.2/share/hadoop/common/lib/commons-cli-1.2.jar:/usr/local/hadoop-2.7.2/share/hadoop/common/lib/commons-logging-1.1.3.jar:./ Join.java
+javac -classpath /usr/local/hadoop-2.7.2/share/hadoop/common/hadoop-common-2.7.2.jar:/usr/local/hadoop-2.7.2/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.2.jar:/usr/local/hadoop-2.7.2/share/hadoop/common/lib/commons-cli-1.2.jar:/usr/local/hadoop-2.7.2/share/hadoop/common/lib/commons-logging-1.1.3.jar:/usr/local/hadoop-2.7.2/share/hadoop/common/lib/log4j-1.2.17.jar:./ -d ./generate Join.java
 
 jar -cvf Join.jar Join*.class
 
@@ -9,8 +9,8 @@ gcc -Wall -rdynamic -shared -o libjnidll.so to_gpu.o
 bin/hadoop jar /home/dblab/lijianing/lijianing_join/lijianing_theta/Join.jar Join
 
 
-hdfs dfs -rm -R /tmp/output
-hdfs dfs -rm -R /tmp/result
+hdfs dfs -rm -R /join/output
+hdfs dfs -rm -R /join/result
 
 scp libjnidll.so lining@slave1-hadoop:~/
 scp libmysharedll.so lining@slave1-hadoop:~/

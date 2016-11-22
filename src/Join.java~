@@ -8,9 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.net.URI;
 
+import org.apache.log4j.Logger;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
@@ -96,7 +96,7 @@ public class Join {
 
 		// private final IntWritable one = new IntWritable(1);
 		// private final IntWritable two = new IntWritable(2);
-
+		private Logger logger = Logger.getLogger(JoinMap2.class);
 		Map<String, Integer> stat = new HashMap<String, Integer>();
 		@SuppressWarnings("deprecation")
 		@Override
@@ -104,18 +104,19 @@ public class Join {
 			
 			try{
 				Path[] localfiles = context.getLocalCacheFiles();
-				log.info("local cache => " + localfiles[0].toString());
+				logger.info("local cache => " + localfiles[0].toString());
 				FileReader fr = new FileReader(localfiles[0].toString());
 				BufferedReader br = new BufferedReader(fr);
 				String inode;
 				while (((inode = br.readLine()) != null)){
-					log.info("dir=>"+inode);
+					logger.info("dir=>"+inode);
 				}
 			}catch (Exception e){
-				log.error(e.getMessage());
+				logger.info("something wrong is here"+e.getMessage());
 			}
-
-			Path hdfs = new Path("hdfs://master-hadoop:9000/tmp/output/");
+			logger.info("let's see the log is working or not");
+			
+			Path hdfs = new Path("hdfs://master-hadoop:9000/join/output/");
 			FileSystem in = FileSystem.get(context.getConfiguration());
 			FileStatus[] status = in.listStatus(hdfs);
 			String str;
@@ -217,13 +218,14 @@ public class Join {
 
 		// FileInputFormat.addInputPath(job, new
 		// Path("hdfs://master-hadoop:9000/usr"));
-		FileInputFormat.addInputPath(job1, new Path("hdfs://master-hadoop:9000/tmp/order.txt"));
-		FileInputFormat.addInputPath(job1, new Path("hdfs://master-hadoop:9000/tmp/user.txt"));
-		FileOutputFormat.setOutputPath(job1, new Path("hdfs://master-hadoop:9000/tmp/output"));
+		FileInputFormat.addInputPath(job1, new Path("hdfs://master-hadoop:9000/join/order.txt"));
+		FileInputFormat.addInputPath(job1, new Path("hdfs://master-hadoop:9000/join/user.txt"));
+		FileOutputFormat.setOutputPath(job1, new Path("hdfs://master-hadoop:9000/join/output"));
 
 		if (job1.waitForCompletion(true)) {
 			//System.out.println(new SimpleDateFormat("yyyyMMddHHmmssSSS") .format(new Date() ));
 			JobConf conf = new JobConf();
+
 			DistributedCache.addCacheFile(new URI("/library/libjnidll.so#libjnidll.so"), conf);
 			DistributedCache.addCacheFile(new URI("/library/libmyshare.so#libmyshare.so"), conf);
 			
@@ -243,9 +245,9 @@ public class Join {
 
 			// FileInputFormat.addInputPath(job, new
 			// Path("hdfs://master-hadoop:9000/usr"));
-			FileInputFormat.addInputPath(job2, new Path("hdfs://master-hadoop:9000/tmp/order.txt"));
-			FileInputFormat.addInputPath(job2, new Path("hdfs://master-hadoop:9000/tmp/user.txt"));		
-			FileOutputFormat.setOutputPath(job2, new Path("hdfs://master-hadoop:9000/tmp/result"));
+			FileInputFormat.addInputPath(job2, new Path("hdfs://master-hadoop:9000/join/order.txt"));
+			FileInputFormat.addInputPath(job2, new Path("hdfs://master-hadoop:9000/join/user.txt"));		
+			FileOutputFormat.setOutputPath(job2, new Path("hdfs://master-hadoop:9000/join/result"));
 
 
 			job2.waitForCompletion(true);

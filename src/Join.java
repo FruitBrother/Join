@@ -116,7 +116,7 @@ public class Join {
 			}
 			logger.info("let's see the log is working or not");
 			
-			Path hdfs = new Path("hdfs://master-hadoop:9000/tmp/output/");
+			Path hdfs = new Path("hdfs://master-hadoop:9000/join/output/");
 			FileSystem in = FileSystem.get(context.getConfiguration());
 			FileStatus[] status = in.listStatus(hdfs);
 			String str;
@@ -218,9 +218,9 @@ public class Join {
 
 		// FileInputFormat.addInputPath(job, new
 		// Path("hdfs://master-hadoop:9000/usr"));
-		FileInputFormat.addInputPath(job1, new Path("hdfs://master-hadoop:9000/tmp/order.txt"));
-		FileInputFormat.addInputPath(job1, new Path("hdfs://master-hadoop:9000/tmp/user.txt"));
-		FileOutputFormat.setOutputPath(job1, new Path("hdfs://master-hadoop:9000/tmp/output"));
+		FileInputFormat.addInputPath(job1, new Path("hdfs://master-hadoop:9000/join/order.txt"));
+		FileInputFormat.addInputPath(job1, new Path("hdfs://master-hadoop:9000/join/user.txt"));
+		FileOutputFormat.setOutputPath(job1, new Path("hdfs://master-hadoop:9000/join/output"));
 
 		if (job1.waitForCompletion(true)) {
 			//System.out.println(new SimpleDateFormat("yyyyMMddHHmmssSSS") .format(new Date() ));
@@ -245,9 +245,9 @@ public class Join {
 
 			// FileInputFormat.addInputPath(job, new
 			// Path("hdfs://master-hadoop:9000/usr"));
-			FileInputFormat.addInputPath(job2, new Path("hdfs://master-hadoop:9000/tmp/order.txt"));
-			FileInputFormat.addInputPath(job2, new Path("hdfs://master-hadoop:9000/tmp/user.txt"));		
-			FileOutputFormat.setOutputPath(job2, new Path("hdfs://master-hadoop:9000/tmp/result"));
+			FileInputFormat.addInputPath(job2, new Path("hdfs://master-hadoop:9000/join/order.txt"));
+			FileInputFormat.addInputPath(job2, new Path("hdfs://master-hadoop:9000/join/user.txt"));		
+			FileOutputFormat.setOutputPath(job2, new Path("hdfs://master-hadoop:9000/join/result"));
 
 
 			job2.waitForCompletion(true);

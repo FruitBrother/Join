@@ -1,0 +1,37 @@
+ssh slave2-hadoop
+rm -r /usr/local/hadoop-2.7.2/dfs
+rm -r /usr/local/hadoop-2.7.2/logs
+mkdir /usr/local/hadoop-2.7.2/logs
+rm -r /usr/local/hadoop-2.7.2/tmp
+exit
+ssh slave3-hadoop
+rm -r /usr/local/hadoop-2.7.2/dfs
+rm -r /usr/local/hadoop-2.7.2/logs
+mkdir /usr/local/hadoop-2.7.2/logs
+rm -r /usr/local/hadoop-2.7.2/tmp
+exit
+ssh slave4-hadoop
+rm -r /usr/local/hadoop-2.7.2/dfs
+rm -r /usr/local/hadoop-2.7.2/logs
+mkdir /usr/local/hadoop-2.7.2/logs
+rm -r /usr/local/hadoop-2.7.2/tmp
+exit
+rm -r /usr/local/hadoop-2.7.2/dfs
+rm -r /usr/local/hadoop-2.7.2/logs
+mkdir /usr/local/hadoop-2.7.2/logs
+rm -r /usr/local/hadoop-2.7.2/tmp
+sbin/hdfs namenode -format
+
+hdfs dfs -copyFromLocal /usr/local/hadoop-2.7.2/LICENSE.txt /
+hadoop jar /usr/local/hadoop-2.7.2/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.2.jar wordcount /LICENSE.txt /word
+
+hdfs dfs -mkdir /library
+hdfs dfs -copyFromLocal /home/lining/桌面/Join/libjnidll.so /library
+hdfs dfs -copyFromLocal /home/lining/桌面/Join/libmyshare.so /library
+
+scp /home/lining/桌面/Join/libmyshare.so lining@slave2-hadoop:~/
+
+hdfs dfs -copyFromLocal /home/lining/桌面/Join/order.txt /tmp
+hdfs dfs -copyFromLocal /home/lining/桌面/Join/user.txt /tmp
+
+/usr/local/hadoop-2.7.2/etc/hadoop/slaves

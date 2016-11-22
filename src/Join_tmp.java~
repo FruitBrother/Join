@@ -5,7 +5,7 @@ import java.io.File;
 //import org.apache.commons.logging.LogFactory;
 public class Join_tmp {
 	//private static final Log LOG = LogFactory.getLog(Join_tmp.class);
-	public static native String[] get_result(String[] ocol1,String[] ocol2,String[] ucol1,String[] ucol2,String cudaFile,int o_size,int u_size);
+	public static native String[] get_result(String[] ocol1,String[] ocol2,String[] ucol1,String[] ucol2,String[] cudaFile,int o_size,int u_size);
 	
 	public static File f1 = null;
 	public static File f2 = null;
