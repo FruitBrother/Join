@@ -1,0 +1,27 @@
+Urna Semper
+李宁
+hadoop
+2016年11月1日
+JNI
+1.编写java代码
+2.编译java代码
+	javac yourfilename.java //生成.class文件
+	由于可能有依赖关系，因此在eclipse里生成
+3.创建.h文件
+	在class文件目录下
+	javah classname
+	生成了.h文件
+4.使用C/C++语言实现java中定义的方法
+	include .h
+	include jni.h
+	set build path 
+		for mac :
+			/System/Library/Frameworks/JavaVM.framework/Versions/A/					Headers/jni_md.h 
+		for linux open-jdk:
+			/usr/lib/jvm/java-7-openjdk-amd64/include
+5.编译.so文件
+	?// gcc -I./ to_gpu.c -fPIC -shared -o libjnidll.so
+or
+	gcc -Wall -fPIC -c to_gpu.c -I./ -I/usr/lib/jvm/java-7-openjdk-amd64/include -I/usr/lib/jvm/java-7-openjdk-amd64/include/linux	//生成hive_test.o
+	
+gcc -Wall -rdynamic -shared -o libjnidll.so to_gpu.o
