@@ -6,3 +6,10 @@ hdfs dfs -rm -R /tmp/output
 hdfs dfs -rm -R /tmp/result
 
 /Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home
+
+rm -r /usr/local/hadoop/dfs
+rm -r /usr/local/hadoop/logs
+mkdir /usr/local/hadoop/logs
+rm -r /usr/local/hadoop/tmp
+
+sbin/hdfs namenode -format
